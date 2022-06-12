@@ -12,8 +12,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: mysql-db
-      MYSQL_ROOT_USER: mysql-root
-      MYSQL_ROOT_PASSWORD: mysql-pw
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - 3306:3306
     deploy:
