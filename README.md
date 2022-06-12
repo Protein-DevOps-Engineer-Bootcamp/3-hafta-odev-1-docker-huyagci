@@ -44,7 +44,6 @@ This repository contains an assignment project developed under the [Patika.dev][
 > - Sets the timezone of the machine as UTC+3 (Europe/Istanbul) and enables Network Time Protocol.
 > - Downloads the latest package information.
 > - Downloads, installs, and configures Docker Engine and Docker Compose.
-> - Sets the environment variables for the stated technologies above.
 > - Sets the permissions of the script files.
 > - Defines a system-wide alias of the main script for easy use.
 
@@ -56,7 +55,7 @@ This repository contains an assignment project developed under the [Patika.dev][
 
 > - Has three modes: Build, Deploy, and Template.
 > - Build and deploy modes may take additional arguments like image name and image tag to define image properties.
-> - Build mode may also take "--registry" argument which will cause re-tag the image with the defined username.
+> - Build mode may also take _"--registry"_ argument which will cause re-tag the image with the defined username.
 > - The re-tagged image will be pushed to the specified container registry.
 > - With deploy mode, you may also name your container and set CPU and memory limits.
 > - Template mode will assist the user with predefined database services in addition to the main image.
@@ -98,7 +97,7 @@ OPTIONS:                 ARGUMENTS:                DESCRIPTION:                 
 -c | --container-name    <container-name>          Container name.                  Optional for DEPLOY mode.
 -p | --cpu               <cpu-limit>               Container CPU limit              Optional for DEPLOY mode.
 -s | --memory            <memory-limit>            Container memory limit.          Optional for DEPLOY mode.
--a | --application-name  <compose-name>            Run MySQL or MongoDB server.     Mandatory for TEMPLATE mode.
+-a | --application-name  <mongo|mysql>             Run MySQL or MongoDB server.     Mandatory for TEMPLATE mode.
 -h | --help                                        Shows this help message.
 ```
 
