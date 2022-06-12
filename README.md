@@ -8,7 +8,8 @@
 
 #### :hash: **Assignment**
 
-> Create a script that helps the developer to dockerize their applications, deploy them locally or push to remote container registry.[^1]
+> Create a script that helps the developer to dockerize their applications, deploy it locally or push to a remote container registry.
+> Provide a MySQL or MongoDB database service with Docker Compose in addition to the application.[^1]
 
 **Script has to be able to ;**
 
