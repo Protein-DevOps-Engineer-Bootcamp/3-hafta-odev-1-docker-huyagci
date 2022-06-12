@@ -89,16 +89,16 @@ This repository contains an assignment project developed under the [Patika.dev][
 ##### _Parameters_
 
 ```bash
-OPTIONS:                 ARGUMENTS:                DESCRIPTION:                              OBLIGATION:
+OPTIONS:                 ARGUMENTS:                DESCRIPTION:                     OBLIGATION:
 
--m | --mode              <build|deploy|template>   Mode selection.                           Mandatory for ALL modes.
--n | --image-name        <image-name>              Docker image name.                        Mandatory for BUILD and DEPLOY modes.
--t | --image-tag         <image-tag>               Docker image tag.                         Mandatory for BUILD and DEPLOY modes.
--r | --registry          <dockerhub|gitlab>        Docker Hub or GitLab Container Registry.  Optional for BUILD Mode.
--c | --container-name    <container-name>          Container name.                           Optional for DEPLOY mode.
--p | --cpu               <cpu-limit>               Container CPU limit                       Optional for DEPLOY mode.
--s | --memory            <memory-limit>            Container memory limit.                   Optional for DEPLOY mode.
--a | --application-name  <compose-name>            Run MySQL or MongoDB server.              Mandatory for TEMPLATE mode.
+-m | --mode              <build|deploy|template>   Mode selection.                  Mandatory for ALL modes.
+-n | --image-name        <image-name>              Docker image name.               Mandatory for BUILD and DEPLOY modes.
+-t | --image-tag         <image-tag>               Docker image tag.                Mandatory for BUILD and DEPLOY modes.
+-r | --registry          <dockerhub|gitlab>        Docker Hub or GitLab Registry.   Optional for BUILD Mode.
+-c | --container-name    <container-name>          Container name.                  Optional for DEPLOY mode.
+-p | --cpu               <cpu-limit>               Container CPU limit              Optional for DEPLOY mode.
+-s | --memory            <memory-limit>            Container memory limit.          Optional for DEPLOY mode.
+-a | --application-name  <compose-name>            Run MySQL or MongoDB server.     Mandatory for TEMPLATE mode.
 -h | --help                                        Shows this help message.
 ```
 
