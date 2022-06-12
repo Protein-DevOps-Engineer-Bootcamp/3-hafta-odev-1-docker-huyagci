@@ -10,10 +10,7 @@
 #############################################
 
 # Configurations directory
-source ./configs/sailboat.cfg
-
-# Current directory of the user.
-CURRENT_DIR=$(pwd)
+source /opt/scripts/configs/sailboat.cfg
 
 # Change directory to target directory if the script executed from another directory.
 cd $TARGET_DIR
@@ -27,7 +24,7 @@ usage() {
 mode_check() {
     # If mode argument is not provided, prompt the usage message and exit.
     if [ -z $MODE ]
-    then echo "Operation Mode is not specified!"
+    then echo -e "${CRED}[ERROR]${COFF} Operation Mode is not specified!"
         usage
         exit 1
     else
@@ -52,7 +49,7 @@ mode_selection() {
 
                 # Build the image.
                 eval $BUILD_CMD
-                echo -e "${CGREEN}[SUCCESS]${COFF} Build completed.\n"
+                echo -e "${CGREEN}[SUCCESS]${COFF} Image build completed.\n"
 
                 # If "--registry" argument is not empty select requested container registry provider.
                 if [[ -n $PUSH_REGISTRY ]]
@@ -60,35 +57,35 @@ mode_selection() {
                     case $PUSH_REGISTRY in
                         "dockerhub")
                             # Get the username to be used in image tag.
-                            echo "What is your Docker Hub username?"
+                            echo -e "${CYELLOW}[INPUT]${COFF} What is your Docker Hub username?"
                             read USERNAME
                             
                             # Re-tag the image according to dockerhub and username provided.
                             TAG_CMD+=" $IMAGE_NAME:$IMAGE_TAG $USERNAME/$IMAGE_NAME:$IMAGE_TAG"
                             eval $TAG_CMD
 
-                            # Push image to the docker hub.
+                            # Push image to the docker hub.  (Login to registry is required)
                             PUSH_CMD+=" $USERNAME/$IMAGE_NAME:$IMAGE_TAG"
                             eval $PUSH_CMD
                         ;;
 
                         "gitlab")
                             # Get the username to be used in image tag.
-                            echo "What is your Gitlab username?"
+                            echo -e "${CYELLOW}[INPUT]${COFF} What is your Gitlab username?"
                             read USERNAME
 
                             # Re-tag the image according to gitlab registry and username provided.
                             TAG_CMD+=" $IMAGE_NAME:$IMAGE_TAG registry.gitlab.com/$USERNAME/$IMAGE_NAME:$IMAGE_TAG"
                             eval $TAG_CMD
 
-                            # Push image to the gitlab registry.
+                            # Push image to the gitlab registry. (Login to registry is required)
                             PUSH_CMD+=" registry.gitlab.com/$USERNAME/$IMAGE_NAME:$IMAGE_TAG"
                             eval $PUSH_CMD
                         ;;
 
                         *)
                             # If anything else than docker hub or gitlab is provided, show usage and exit.
-                            echo "You must select a valid image registry. Must be dockerhub or gitlab"
+                            echo -e "${CRED}[ERROR]${COFF} You must select a valid image registry. Must be Docker Hub or Gitlab"
                             usage
                             exit 1
                         ;;
@@ -118,27 +115,23 @@ mode_selection() {
                 DEPLOY_CMD=$(echo $DEPLOY_CMD | sed "s/$/ $IMAGE_NAME:$IMAGE_TAG/")
 
                 # Run the docker image.
-                eval echo $DEPLOY_CMD
+                eval $DEPLOY_CMD
             fi
         ;;
 
         # Template mode case.
         "template")
-            echo "Template mode selected"
-
             # Select the specified case depending on user input.
             case $APPLICATION_NAME in
                 "mongo")
-                    echo "Mongo selected"
-
+                    echo -e "${CCYAN}[INFO]${COFF} MongoDB selected as a database service."
                     # Use docker compose file with mongo db in detached mode.
                     TEMPLATE_CMD+=" -f mongo.yaml up -d"
                     eval $TEMPLATE_CMD
                 ;;
 
                 "mysql")
-                    echo "MySQL selected"
-
+                    echo -e "${CCYAN}[INFO]${COFF} MySQL selected as a database service."
                     # Use docker compose file with mysql db in detached mode.
                     TEMPLATE_CMD+=" -f mysql.yaml up -d"
                     eval $TEMPLATE_CMD
@@ -146,14 +139,14 @@ mode_selection() {
 
                 "")
                     # If appication name is not specified, show usage and exit.
-                    echo "Application name cannot be empty"
+                    echo -e "${CRED}[ERROR]${COFF} Application name is not specified!"
                     usage
                     exit 1
                 ;;
 
                 *)
                     # If invalid application name is specified, show usage and exit.
-                    echo "You must provide a valid application name. Must be mongo or mysql"
+                    echo -e "${CRED}[ERROR]${COFF} You must provide a valid application name. Must be 'mongo' or 'mysql'"
                     usage
                     exit 1
                 ;;
@@ -162,7 +155,7 @@ mode_selection() {
 
         "")
             # If an operation mode is not specified, show usage and exit.
-            echo "Mode not selected"
+            echo -e "${CRED}[ERROR]${COFF} Operation mode is not selected!"
             usage
             exit 1
         ;;
@@ -181,14 +174,14 @@ for ARG in "$@"; do
     shift
     case "${ARG}" in
         '--mode')               set -- "$@" '-m'     ;;
-        '--image-name')         set -- "$@" '-n'    ;;
-        '--image-tag')          set -- "$@" '-t'    ;;
-        '--registry')           set -- "$@" '-r'    ;;
-        '--container-name')     set -- "$@" '-c'    ;;
-        '--cpu')                set -- "$@" '-p'    ;;
-        '--memory')             set -- "$@" '-s'    ;;
-        '--application-name')   set -- "$@" '-a'    ;;
-        '--help')               set -- "$@" '-h'    ;;
+        '--image-name')         set -- "$@" '-n'     ;;
+        '--image-tag')          set -- "$@" '-t'     ;;
+        '--registry')           set -- "$@" '-r'     ;;
+        '--container-name')     set -- "$@" '-c'     ;;
+        '--cpu')                set -- "$@" '-p'     ;;
+        '--memory')             set -- "$@" '-s'     ;;
+        '--application-name')   set -- "$@" '-a'     ;;
+        '--help')               set -- "$@" '-h'     ;;
         *)                      set -- "$@" "${ARG}" ;;
     esac
 done
@@ -226,4 +219,4 @@ shift $(expr $OPTIND - 1)
 mode_check
 
 # Change directory to previous directory if executed from another directory.
-cd CURRENT_DIR &>/dev/null
+cd -
