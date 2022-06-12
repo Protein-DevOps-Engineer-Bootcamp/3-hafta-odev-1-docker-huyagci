@@ -12,8 +12,8 @@ services:
     restart: always
     environment:
       MONGO_INITDB_DATABASE: mongo-db
-      MONGO_INITDB_ROOT_USERNAME: mongo-root
-      MONGO_INITDB_ROOT_PASSWORD: mongo-pw
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
     ports:
       - 27017:27017
     deploy:
