@@ -8,7 +8,7 @@
 
 #### :hash: **Assignment**
 
-> Create a script that helps the developer to dockerize their applications[^1], deploy them locally or push to remote container registry.
+> Create a script that helps the developer to dockerize their applications, deploy them locally or push to remote container registry.[^1]
 
 **Script has to be able to ;**
 
