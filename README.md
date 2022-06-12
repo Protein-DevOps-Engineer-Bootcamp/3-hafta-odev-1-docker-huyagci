@@ -119,7 +119,7 @@ Sample Project      : /opt/projects/python
 ```
 
 <!-- View Counter -->
-<p align="right"><img src="https://komarev.com/ghpvc/?username=test85632&style=flat&label=Views&color=blue" alt="View Counter"></a></p>
+<p align="right"><img src="https://komarev.com/ghpvc/?username=week-3-assignment-huyagci&style=flat&label=Views&color=blue" alt="View Counter"></a></p>
 
 <!-- Footnotes -->
 
