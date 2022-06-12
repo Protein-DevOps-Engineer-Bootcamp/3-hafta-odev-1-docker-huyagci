@@ -1,0 +1,6 @@
+# Project Files
+.vagrant/
+**containerd/
+
+# Visual Studio Code
+.vscode/
